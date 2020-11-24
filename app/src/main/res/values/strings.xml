@@ -1,27 +1,19 @@
 <resources>
-    <string name="app_name">SnakeEyes</string>
+    <string name="app_name">Snake Eyes</string>
     <string name="credits">App made by: Talon Ernst, Landon Hebert, Taylor McVittie</string>
     <string name="RandomDiceRoller">Random Dice Roller</string>
     <string name="PressButton">Press Button To Roll</string>
     <string name="Roll">Roll</string>
     <string name="Settings">Settings</string>
     <string name="Stats">Stats</string>
+    <string name="SaveGame">Save Game On Close</string>
+    <string name="GamePlay">Game Play</string>
+    <string name="ChooseTheme">Choose Theme</string>
+    <string name="DarkTheme">Dark Theme</string>
 
+    
 
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+  
 </resources>

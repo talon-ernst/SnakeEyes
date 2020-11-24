@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:background">@null</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <!--Splash Screen-->
@@ -14,4 +15,14 @@
         <item name="android:windowBackground">@color/colorBlack</item>
     </style>
 
+    <!--Dark Theme-->
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorBlack</item>
+        <item name="android:itemBackground">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@null</item>
+
+
+    </style>
 </resources>

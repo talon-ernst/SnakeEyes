@@ -2,34 +2,37 @@ package ca.on.conesotgac.te.snakeeyes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private Button buttonRoll;
     private ImageView DiceSide;
-
+    private TextView DiceRolled;
+    private SharedPreferences sharedPreferences;
     private int DiceNumber;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
-        super.onCreate(savedInstanceState);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SetBackgroundColor();
         setContentView(R.layout.activity_main);
-
+        super.onCreate(savedInstanceState);
 
         buttonRoll = findViewById(R.id.btnRollDice);
         DiceSide = findViewById(R.id.imageViewDice);
-
+        DiceRolled = findViewById(R.id.textViewDiceRolled);
+        DiceSide.setImageResource(R.drawable.ic_dice_target);
 
         buttonRoll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                       DiceSide.setImageResource(R.drawable.ic_cauliflower);
                       break;
               }
+                DiceRolled.setText("" + DiceNumber);
             }
         });
     }
@@ -91,5 +95,28 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return ret;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SetBackgroundColor();
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
+    //Sets background color to light/dark based on players preference.
+    public void SetBackgroundColor(){
+        boolean isItChecked = sharedPreferences.getBoolean("themeChoice", true);
+        if (isItChecked){
+            setTheme(R.style.DarkTheme);
+        }
+        else {
+            setTheme(R.style.AppTheme);
+        }
     }
 }
