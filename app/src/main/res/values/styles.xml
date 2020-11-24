@@ -5,6 +5,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <!--Splash Screen-->
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@drawable/ic_cauliflower</item>
+        <item name="android:windowBackground">@color/colorBlack</item>
     </style>
 
 </resources>
