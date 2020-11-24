@@ -10,6 +10,8 @@
     <string name="GamePlay">Game Play</string>
     <string name="ChooseTheme">Choose Theme</string>
     <string name="DarkTheme">Dark Theme</string>
+    <string name="NumberOfSidesOnDice">Number of Sides on Dice</string>
+    <string name="PleaseSelect"> Please select amount of sides on dice.</string>
 
     
 

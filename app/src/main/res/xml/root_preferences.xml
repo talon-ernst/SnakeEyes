@@ -14,4 +14,12 @@
             android:key="themeChoice"
             android:title="@string/DarkTheme" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/NumberOfSidesOnDice">
+        <ListPreference
+            android:defaultValue="true"
+            android:entries="@array/DiceSidesEntries"
+            android:entryValues="@array/DiceSidesValues"
+            android:key="diceSides"
+            android:title="@string/PleaseSelect" />
+    </PreferenceCategory>
 </PreferenceScreen>

@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private int DiceNumber;
 
+    private String DesiredDiceSidesString;
+    private int DesiredDiceSidesInt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -33,11 +36,14 @@ public class MainActivity extends AppCompatActivity {
         DiceSide = findViewById(R.id.imageViewDice);
         DiceRolled = findViewById(R.id.textViewDiceRolled);
         DiceSide.setImageResource(R.drawable.ic_dice_target);
+        DesiredDiceSidesString = sharedPreferences.getString("diceSides", "6");
+        DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
+
 
         buttonRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              DiceNumber = GetDiceNumber(1, 6);
+              DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
               switch (DiceNumber)
               {
                   case 1:
