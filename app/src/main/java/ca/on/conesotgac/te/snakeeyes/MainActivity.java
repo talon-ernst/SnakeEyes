@@ -100,6 +100,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_stats:
                 startActivity(new Intent(getApplicationContext(), StatsActivity.class));
                 break;
+            case R.id.menu_game:
+                startActivity(new Intent(getApplicationContext(), GameActivity.class));
+                break;
+            case R.id.menu_about:
+                startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+                break;
             default:
                 ret = super.onOptionsItemSelected(item);
                 break;
