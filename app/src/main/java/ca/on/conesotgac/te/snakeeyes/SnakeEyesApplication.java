@@ -18,13 +18,13 @@ public class SnakeEyesApplication extends Application{
             public void onCreate(SQLiteDatabase sqLiteDatabase) {
                 //Table for game page stats
                 sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS tbl_game_stats(" +
-                        "game_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, max_roll NUMBER, " +
-                        "player_roll NUMBER, computer_roll NUMBER, game_result CHAR)");
+                        "game_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, max_roll INTEGER, " +
+                        "player_roll INTEGER, computer_roll INTEGER, game_result CHAR)");
 
                 //Table for roll page stats
                 sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS tbl_roll_stats(" +
-                        "roll_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, max_roll NUMBER, " +
-                        "player_roll NUMBER)");
+                        "roll_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, max_roll INTEGER, " +
+                        "player_roll INTEGER)");
             }
 
             @Override
@@ -35,7 +35,6 @@ public class SnakeEyesApplication extends Application{
         super.onCreate();
     }
 
-
     //Function to add a result into the database upon game completion
     public void SEAddGameResult(int maxRoll, int playerRoll, int computerRoll, char result){
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -44,7 +43,7 @@ public class SnakeEyesApplication extends Application{
     }
 
     //Function to add a result into the database after a dice roll
-    public void SEAddDiceResult(int maxRoll, int playerRoll, int computerRoll, char result){
+    public void SEAddDiceResult(int maxRoll, int playerRoll){
         SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL("INSERT INTO tbl_roll_stats(max_roll, player_roll)" +
                 "VALUES(" + maxRoll + ", " + playerRoll + ")");
@@ -74,6 +73,24 @@ public class SnakeEyesApplication extends Application{
         int returnNumber;
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT AVG(" + searchTerm + ") FROM " + tableName, null);
+
+        if (cursor.getCount() <= 0) {
+            returnNumber = 0;
+        }
+        else {
+            cursor.moveToFirst();
+            returnNumber = cursor.getInt(0);
+            cursor.close();
+        }
+        return(returnNumber);
+    }
+
+    //Function to get the the last player roll
+    public int SEGetLastRoll(String searchTerm){
+        int returnNumber;
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + searchTerm + " FROM tbl_roll_stats" +
+                "WHERE roll_id = (SELECT MAX(roll_id) FROM tbl_roll_stats)", null);
 
         if (cursor.getCount() <= 0) {
             returnNumber = 0;

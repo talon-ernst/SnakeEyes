@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                       break;
               }
                 DiceRolled.setText("" + DiceNumber);
+                ((SnakeEyesApplication) getApplication()).SEAddDiceResult(DesiredDiceSidesInt, DiceNumber);
             }
         });
     }

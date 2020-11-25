@@ -17,12 +17,23 @@
     <string name="dash">-</string>
     <string name="PlayerWins">Player Wins!</string>
     <string name="tie">It\'s A Tie!</string>
-    <string name="AiWins">Ai Wins!</string>
+    <string name="AiWins">AI Wins!</string>
 
-
+    <!--Activity Titles-->
     <string name="title_activity_settings">Settings Page</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_game">Snake Eyes Game</string>
     <string name="title_activity_stats">Statistics</string>
 
+    <!--Stats Strings-->
+    <string name="AveragePlayerRoll">Average Player Roll</string>
+    <string name="AverageComputerRoll">Average Computer Roll</string>
+    <string name="AverageMaxRoll">Average Maximum Roll</string>
+    <string name="TotalRecord">Win-Loss-Draw Record</string>
+    <string name="LastRoll">Last Roll(Roll/Max)</string>
+    <string name="ResetGameStats">Reset Game Statistics</string>
+    <string name="ResetDiceStats">Reset Dice Roll Statistics</string>
+    <string name="Reset">Reset</string>
+    <string name="GameStats">Game Stats</string>
+    <string name="RollStats">Dice Roll Stats</string>
 </resources>
