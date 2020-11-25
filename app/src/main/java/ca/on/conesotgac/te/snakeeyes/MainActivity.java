@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         DiceRolled = findViewById(R.id.textViewDiceRolled);
         DiceSide.setImageResource(R.drawable.ic_dice_target);
         DesiredDiceSidesString = sharedPreferences.getString("diceSides", "6");
-        DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
+       DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
 
 
         buttonRoll.setOnClickListener(new View.OnClickListener() {

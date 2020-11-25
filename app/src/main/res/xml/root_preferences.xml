@@ -16,10 +16,11 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/NumberOfSidesOnDice">
         <ListPreference
-            android:defaultValue="true"
+            android:defaultValue="6"
             android:entries="@array/DiceSidesEntries"
             android:entryValues="@array/DiceSidesValues"
             android:key="diceSides"
-            android:title="@string/PleaseSelect" />
+            android:title="@string/PleaseSelect"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 </PreferenceScreen>
