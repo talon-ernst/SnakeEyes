@@ -12,10 +12,17 @@
     <string name="DarkTheme">Dark Theme</string>
     <string name="NumberOfSidesOnDice">Number of Sides on Dice</string>
     <string name="PleaseSelect"> Please select amount of sides on dice.</string>
+    <string name="computer">Computer</string>
+    <string name="player">Player</string>
+    <string name="dash">-</string>
+    <string name="PlayerWins">Player Wins!</string>
+    <string name="tie">It\'s A Tie!</string>
+    <string name="AiWins">Ai Wins!</string>
 
-    
 
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings Page</string>
+    <string name="title_activity_about">About</string>
+    <string name="title_activity_game">Snake Eyes Game</string>
+    <string name="title_activity_stats">Statistics</string>
 
-  
 </resources>

@@ -1,17 +1,15 @@
 package ca.on.conesotgac.te.snakeeyes;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-
-public class SettingsActivity extends AppCompatActivity {
-
+public class AboutActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private boolean darkThemeChecked;
@@ -21,17 +19,31 @@ public class SettingsActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SetBackgroundColor();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
-                .commit();
+        setContentView(R.layout.activity_about);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SetBackgroundColor();
+    }
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+    public void SetBackgroundColor(){
+        darkThemeChecked = sharedPreferences.getBoolean("themeChoice", false);
+        if (darkThemeChecked){
+            setTheme(R.style.DarkTheme);
+        }
+        else {
+            setTheme(R.style.AppTheme);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         boolean ret = true;
@@ -44,37 +56,6 @@ public class SettingsActivity extends AppCompatActivity {
                 ret =  super.onOptionsItemSelected(item);
                 break;
         }
-
         return ret;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SetBackgroundColor();
-    }
-
-    protected void onRestart() {
-        super.onRestart();
-        finish();
-        startActivity(getIntent());
-    }
-    //Sets background color to light/dark based on players preference.
-    public void SetBackgroundColor(){
-        darkThemeChecked = sharedPreferences.getBoolean("themeChoice", false);
-        if (darkThemeChecked){
-            setTheme(R.style.DarkTheme);
-        }
-        else {
-            setTheme(R.style.AppTheme);
-        }
-    }
-
-
-    public static class SettingsFragment extends PreferenceFragmentCompat {
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey);
-        }
     }
 }
