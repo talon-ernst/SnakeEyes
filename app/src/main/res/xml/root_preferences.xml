@@ -10,7 +10,6 @@
     <PreferenceCategory android:title="@string/ChooseTheme">
 
         <SwitchPreference
-            android:defaultValue="false"
             android:key="themeChoice"
             android:title="@string/DarkTheme" />
     </PreferenceCategory>

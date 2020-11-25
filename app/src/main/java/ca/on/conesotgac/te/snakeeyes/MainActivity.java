@@ -20,10 +20,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView DiceSide;
     private TextView DiceRolled;
     private SharedPreferences sharedPreferences;
+
     private int DiceNumber;
+    private int DesiredDiceSidesInt = 6;
+
+    private boolean darkThemeChecked;
 
     private String DesiredDiceSidesString;
-    private int DesiredDiceSidesInt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         DiceRolled = findViewById(R.id.textViewDiceRolled);
         DiceSide.setImageResource(R.drawable.ic_dice_target);
         DesiredDiceSidesString = sharedPreferences.getString("diceSides", "6");
-       DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
+        DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
 
 
         buttonRoll.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Sets background color to light/dark based on players preference.
     public void SetBackgroundColor(){
-        boolean isItChecked = sharedPreferences.getBoolean("themeChoice", true);
-        if (isItChecked){
+        darkThemeChecked = sharedPreferences.getBoolean("themeChoice", false);
+        if (darkThemeChecked){
             setTheme(R.style.DarkTheme);
         }
         else {
