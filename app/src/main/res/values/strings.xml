@@ -36,4 +36,13 @@
     <string name="Reset">Reset</string>
     <string name="GameStats">Game Stats</string>
     <string name="RollStats">Dice Roll Stats</string>
+
+    <!--About Page-->
+    <string name="CreatorString">Creators:</string>
+    <string name="talon">Talon Ernst: ternst6858@conestogac.on.ca</string>
+    <string name="taylor">Taylor McVittie: tmcvittie1153@conestogac.on.ca</string>
+    <string name="landon">Landon Hebert: lhebert7289@conestogac.on.ca</string>
+
+
+
 </resources>
