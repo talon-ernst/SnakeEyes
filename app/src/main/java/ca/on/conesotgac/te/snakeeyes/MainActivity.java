@@ -3,7 +3,6 @@ package ca.on.conesotgac.te.snakeeyes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Sets a bunch of things used throughout the program
     private Button buttonRoll;
     private ImageView DiceSide;
     private TextView DiceRolled;
@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean darkThemeChecked;
 
     private String DesiredDiceSidesString;
-
-
+    //On Create Function
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
 
+        //Sets UI
         buttonRoll = findViewById(R.id.btnRollDice);
         DiceSide = findViewById(R.id.imageViewDice);
         DiceRolled = findViewById(R.id.textViewDiceRolled);
@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         DesiredDiceSidesString = sharedPreferences.getString("diceSides", "6");
         DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
 
-
         buttonRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Gets random number and changes picture to what it is
               DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
               switch (DiceNumber)
               {
@@ -78,18 +78,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Gets a random number for dice roll
     private static int GetDiceNumber(int a, int b){
         return (b>=a
                 ? a + (int)Math.floor(Math.random()*(b - a + 1))
                 : GetDiceNumber(b, a));
     }
 
+    //Creates the top right menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.snake_eyes_menu, menu);
         return true;
     }
 
+    //Starts the responding activity to what the user hits on the menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         boolean ret = true;
@@ -114,12 +117,14 @@ public class MainActivity extends AppCompatActivity {
         return ret;
     }
 
+    //On Resume function
     @Override
     protected void onResume() {
         super.onResume();
         SetBackgroundColor();
     }
 
+    //On Restart function
     protected void onRestart() {
         super.onRestart();
         finish();

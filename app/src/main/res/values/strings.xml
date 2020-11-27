@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Snake Eyes</string>
-    <string name="credits">App made by: Talon Ernst, Landon Hebert, Taylor McVittie</string>
     <string name="RandomDiceRoller">Random Dice Roller</string>
     <string name="PressButton">Press Button To Roll</string>
     <string name="Roll">Roll</string>
     <string name="Settings">Settings</string>
     <string name="Stats">Stats</string>
     <string name="SaveGame">Save Game On Close</string>
+    <string name="app_name">Snake Eyes</string>
+    <string name="credits">App made by: Talon Ernst, Landon Hebert, Taylor McVittie</string>
     <string name="GamePlay">Game Play</string>
     <string name="ChooseTheme">Choose Theme</string>
     <string name="DarkTheme">Dark Theme</string>
@@ -42,7 +42,4 @@
     <string name="talon">Talon Ernst: ternst6858@conestogac.on.ca</string>
     <string name="taylor">Taylor McVittie: tmcvittie1153@conestogac.on.ca</string>
     <string name="landon">Landon Hebert: lhebert7289@conestogac.on.ca</string>
-
-
-
 </resources>
