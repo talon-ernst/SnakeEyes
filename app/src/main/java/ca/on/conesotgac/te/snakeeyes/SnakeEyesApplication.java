@@ -55,7 +55,7 @@ public class SnakeEyesApplication extends Application{
         int returnNumber;
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT COUNT(game_id) FROM tbl_game_stats " +
-                "GROUP BY game_result HAVING game_result= '" + searchTerm + "'", null);
+                "WHERE game_result = '" + searchTerm + "'", null);
 
         if (cursor.getCount() <= 0) {
             returnNumber = 0;
@@ -89,7 +89,7 @@ public class SnakeEyesApplication extends Application{
     public int SEGetLastRoll(String searchTerm){
         int returnNumber;
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + searchTerm + " FROM tbl_roll_stats" +
+        Cursor cursor = db.rawQuery("SELECT " + searchTerm + " FROM tbl_roll_stats " +
                 "WHERE roll_id = (SELECT MAX(roll_id) FROM tbl_roll_stats)", null);
 
         if (cursor.getCount() <= 0) {

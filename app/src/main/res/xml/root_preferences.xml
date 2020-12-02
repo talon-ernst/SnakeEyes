@@ -1,20 +1,24 @@
+<!--app:iconSpaceReserved="false" added to every element to bypass default margin-->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="@string/GamePlay">
+    xmlns:app="http://schemas.android.com/apk/res-auto" app:iconSpaceReserved="false">
+    <PreferenceCategory android:title="@string/GamePlay" app:iconSpaceReserved="false">
 
         <SwitchPreference
+            app:iconSpaceReserved="false"
             android:defaultValue="false"
             android:key="saveGame"
             android:title="@string/SaveGame" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/ChooseTheme">
+    <PreferenceCategory android:title="@string/ChooseTheme" app:iconSpaceReserved="false">
 
         <SwitchPreference
+            app:iconSpaceReserved="false"
             android:key="themeChoice"
             android:title="@string/DarkTheme" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/NumberOfSidesOnDice">
+    <PreferenceCategory android:title="@string/NumberOfSidesOnDice" app:iconSpaceReserved="false">
         <ListPreference
+            app:iconSpaceReserved="false"
             android:defaultValue="6"
             android:entries="@array/DiceSidesEntries"
             android:entryValues="@array/DiceSidesValues"

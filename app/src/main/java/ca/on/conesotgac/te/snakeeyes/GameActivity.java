@@ -8,6 +8,7 @@ import androidx.preference.PreferenceManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,8 @@ public class GameActivity extends AppCompatActivity {
     TextView PlayerScore;
     TextView AiScore;
 
-
+    String DesiredDiceSidesString;
+    Integer DesiredDiceSidesInt;
 
 
 
@@ -53,6 +55,9 @@ public class GameActivity extends AppCompatActivity {
         PlayerScore = findViewById(R.id.textViewPlayerScore);
         AiScore = findViewById(R.id.textViewAiScore);
 
+        DesiredDiceSidesString = sharedPreferences.getString("diceSides", "6");
+        DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
+
         buttonRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +76,46 @@ public class GameActivity extends AppCompatActivity {
         finish();
         startActivity(getIntent());
     }
+
+    //Creates the top right menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.snake_eyes_menu, menu);
+        //Hides back button
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(false); // disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // remove the icon
+        }
+        return true;
+    }
+
+    //Starts the responding activity to what the user hits on the menu
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        boolean ret = true;
+
+        switch (item.getItemId()) {
+            case R.id.menu_home:
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                break;
+            case R.id.menu_stats:
+                startActivity(new Intent(getApplicationContext(), StatsActivity.class));
+                break;
+            case R.id.menu_about:
+                startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+                break;
+            case R.id.menu_settings:
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                break;
+            default:
+                ret = super.onOptionsItemSelected(item);
+                break;
+        }
+        return ret;
+    }
+/*
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         boolean ret = true;
@@ -84,7 +129,7 @@ public class GameActivity extends AppCompatActivity {
                 break;
         }
         return ret;
-    }
+    }*/
 
 
     public void ShowImages(){
@@ -100,25 +145,32 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void PlayGame(){
-      playerNumber = GetDiceNumber(1, 6);
-      aiNumber = GetDiceNumber(1, 6);
+      playerNumber = GetDiceNumber(1, DesiredDiceSidesInt);
+      aiNumber = GetDiceNumber(1, DesiredDiceSidesInt);
+      char gameResult;
 
       if (playerNumber > aiNumber){
           WinLose.setText(R.string.PlayerWins);
           Compare.setText("<");
+          gameResult = 'W';
       }
       else if (aiNumber > playerNumber){
           WinLose.setText(R.string.AiWins);
           Compare.setText(">");
+          gameResult = 'L';
       }
       else {
           WinLose.setText(R.string.tie);
           Compare.setText("-");
+          gameResult = 'D';
       }
         SetImages(playerNumber, playerImage);
         SetImages(aiNumber, aiImage);
         PlayerScore.setText("" + playerNumber);
         AiScore.setText("" + aiNumber);
+
+        ((SnakeEyesApplication) getApplication())
+                .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
     }
 
     private void SetImages(int number, ImageView image){
@@ -144,6 +196,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
+
     public void SetBackgroundColor(){
         darkThemeChecked = sharedPreferences.getBoolean("themeChoice", false);
         if (darkThemeChecked){
