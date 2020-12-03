@@ -140,23 +140,22 @@ public class GameActivity extends AppCompatActivity {
       if(playerNumber>0)
       {
           if (playerNumber > aiNumber){
-              Winner = "Player Wins";
+              Winner = getString(R.string.PlayerWins);
               compareWinner = "<";
               gameResult = 'W';
           }
           else if (aiNumber > playerNumber){
-              Winner = "AI Wins";
+              Winner = getString(R.string.AiWins);
               compareWinner = ">";
               gameResult = 'L';
           }
           else {
-              Winner = "Tie";
+              Winner = getString(R.string.tie);
               compareWinner = "-";
               gameResult = 'D';
           }
           SetImages(playerNumber, playerImage);
           SetImages(aiNumber, aiImage);
-
 
           ((SnakeEyesApplication) getApplication())
                   .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
