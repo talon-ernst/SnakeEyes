@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         creatingActivity = true;
         super.onCreate(savedInstanceState);
 
+        //start notification service
+        startService(new Intent(getApplicationContext(), RollNotificationService.class));
+
         //Sets UI
         buttonRoll = findViewById(R.id.btnRollDice);
         DiceSide = findViewById(R.id.imageViewDice);
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     multipleGames = true;
                     DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
                     Roll();
+                    //start notification service
+                    startService(new Intent(getApplicationContext(), RollNotificationService.class));
                 }
             }
         });

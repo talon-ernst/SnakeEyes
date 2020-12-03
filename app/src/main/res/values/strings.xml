@@ -42,4 +42,8 @@
     <string name="talon">Talon Ernst: ternst6858@conestogac.on.ca</string>
     <string name="taylor">Taylor McVittie: tmcvittie1153@conestogac.on.ca</string>
     <string name="landon">Landon Hebert: lhebert7289@conestogac.on.ca</string>
+
+    <!-- Notification Strings -->
+    <string name="roll_notif_title">Previous Roll</string>
+    <string name="roll_notif_body">Your last dice roll was a</string>
 </resources>
