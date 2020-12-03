@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +26,8 @@ public class GameActivity extends AppCompatActivity {
     private boolean darkThemeChecked;
     private boolean saveState;
     private boolean createActivity;
+    private String Winner;
+    private String compareWinner;
 
     Button buttonRoll;
     ImageView aiImage;
@@ -132,29 +136,27 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void PlayGame(){
-
       char gameResult;
       if(playerNumber>0)
       {
           if (playerNumber > aiNumber){
-              WinLose.setText(R.string.PlayerWins);
-              Compare.setText("<");
+              Winner = "Player Wins";
+              compareWinner = "<";
               gameResult = 'W';
           }
           else if (aiNumber > playerNumber){
-              WinLose.setText(R.string.AiWins);
-              Compare.setText(">");
+              Winner = "AI Wins";
+              compareWinner = ">";
               gameResult = 'L';
           }
           else {
-              WinLose.setText(R.string.tie);
-              Compare.setText("-");
+              Winner = "Tie";
+              compareWinner = "-";
               gameResult = 'D';
           }
           SetImages(playerNumber, playerImage);
           SetImages(aiNumber, aiImage);
-          PlayerScore.setText("" + playerNumber);
-          AiScore.setText("" + aiNumber);
+
 
           ((SnakeEyesApplication) getApplication())
                   .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
@@ -163,6 +165,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void SetImages(int number, ImageView image){
+
+        image.setAlpha(0f);
         switch (number){
             case 1:
                 image.setImageResource(R.drawable.ic_dice_six_faces_one);
@@ -183,6 +187,17 @@ public class GameActivity extends AppCompatActivity {
                 image.setImageResource(R.drawable.ic_dice_six_faces_six);
                 break;
         }
+
+        image.animate().alpha(1f).setDuration(1000).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                PlayerScore.setText("" + playerNumber);
+                AiScore.setText("" + aiNumber);
+                WinLose.setText("" + Winner);
+                Compare.setText("" + compareWinner);
+            }
+        });
 
     }
 
