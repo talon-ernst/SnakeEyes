@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private int DesiredDiceSidesInt = 6;
 
     private boolean darkThemeChecked;
+    private boolean saveState;
+    private boolean creatingActivity;
 
     private String DesiredDiceSidesString;
     //On Create Function
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SetBackgroundColor();
         setContentView(R.layout.activity_main);
+        creatingActivity = true;
         super.onCreate(savedInstanceState);
 
         //Sets UI
@@ -48,33 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Gets random number and changes picture to what it is
               DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
-              switch (DiceNumber)
-              {
-                  case 1:
-                      DiceSide.setImageResource(R.drawable.ic_dice_six_faces_one);
-                      break;
-                  case 2:
-                      DiceSide.setImageResource(R.drawable.ic_dice_six_faces_two);
-                      break;
-                  case 3:
-                      DiceSide.setImageResource(R.drawable.ic_dice_six_faces_three);
-                      break;
-                  case 4:
-                      DiceSide.setImageResource(R.drawable.ic_dice_six_faces_four);
-                      break;
-                  case 5:
-                      DiceSide.setImageResource(R.drawable.ic_dice_six_faces_five);
-                      break;
-                  case 6:
-                      DiceSide.setImageResource(R.drawable.ic_dice_six_faces_six);
-                      break;
-                  default:
-                      DiceSide.setImageResource(R.drawable.ic_cauliflower);
-                      break;
-              }
-                DiceRolled.setText("" + DiceNumber);
-                ((SnakeEyesApplication) getApplication())
-                        .SEAddDiceResult(DesiredDiceSidesInt, DiceNumber);
+              Roll();
             }
         });
     }
@@ -118,11 +95,28 @@ public class MainActivity extends AppCompatActivity {
         return ret;
     }
 
+    @Override
+    protected void onPause() {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putInt("DiceInt", DiceNumber);
+        ed.commit();
+        super.onPause();
+    }
+
     //On Resume function
     @Override
     protected void onResume() {
         super.onResume();
+        saveState = sharedPreferences.getBoolean("saveGame",false);
+
+        if(saveState || !creatingActivity)
+        {
+            DiceNumber= sharedPreferences.getInt("DiceInt",0);
+        }
+
+        Roll();
         SetBackgroundColor();
+        creatingActivity = false;
     }
 
     //On Restart function
@@ -141,5 +135,40 @@ public class MainActivity extends AppCompatActivity {
         else {
             setTheme(R.style.AppTheme);
         }
+    }
+
+    public void Roll()
+    {
+        switch (DiceNumber)
+        {
+            case 1:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_one);
+                break;
+            case 2:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_two);
+                break;
+            case 3:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_three);
+                break;
+            case 4:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_four);
+                break;
+            case 5:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_five);
+                break;
+            case 6:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_six);
+                break;
+            default:
+                DiceSide.setImageResource(R.drawable.ic_dice_target_light);
+                break;
+        }
+        if(DiceNumber>0)
+        {
+            DiceRolled.setText("" + DiceNumber);
+            ((SnakeEyesApplication) getApplication())
+                    .SEAddDiceResult(DesiredDiceSidesInt, DiceNumber);
+        }
+
     }
 }

@@ -40,7 +40,7 @@
             <ImageView
                 android:id="@+id/imageViewDice"
                 android:layout_width="wrap_content"
-                android:layout_height="305dp"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 android:background="@color/colorWhite"
                 app:srcCompat="@drawable/ic_dice_target_light" />

@@ -22,6 +22,8 @@ public class GameActivity extends AppCompatActivity {
     private int aiNumber;
     private SharedPreferences sharedPreferences;
     private boolean darkThemeChecked;
+    private boolean saveState;
+    private boolean createActivity;
 
     Button buttonRoll;
     ImageView aiImage;
@@ -40,6 +42,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SetBackgroundColor();
+        createActivity = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         ActionBar actionBar = getSupportActionBar();
@@ -61,16 +64,14 @@ public class GameActivity extends AppCompatActivity {
         buttonRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                playerNumber = GetDiceNumber(1, DesiredDiceSidesInt);
+                aiNumber = GetDiceNumber(1, DesiredDiceSidesInt);
                 PlayGame();
                 ShowImages();
             }
         });
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SetBackgroundColor();
-    }
+
     protected void onRestart() {
         super.onRestart();
         finish();
@@ -115,21 +116,7 @@ public class GameActivity extends AppCompatActivity {
         }
         return ret;
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        boolean ret = true;
 
-        switch (item.getItemId()){
-            case android.R.id.home:
-                super.onBackPressed();
-                break;
-            default:
-                ret =  super.onOptionsItemSelected(item);
-                break;
-        }
-        return ret;
-    }*/
 
 
     public void ShowImages(){
@@ -145,32 +132,34 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void PlayGame(){
-      playerNumber = GetDiceNumber(1, DesiredDiceSidesInt);
-      aiNumber = GetDiceNumber(1, DesiredDiceSidesInt);
+
       char gameResult;
+      if(playerNumber>0)
+      {
+          if (playerNumber > aiNumber){
+              WinLose.setText(R.string.PlayerWins);
+              Compare.setText("<");
+              gameResult = 'W';
+          }
+          else if (aiNumber > playerNumber){
+              WinLose.setText(R.string.AiWins);
+              Compare.setText(">");
+              gameResult = 'L';
+          }
+          else {
+              WinLose.setText(R.string.tie);
+              Compare.setText("-");
+              gameResult = 'D';
+          }
+          SetImages(playerNumber, playerImage);
+          SetImages(aiNumber, aiImage);
+          PlayerScore.setText("" + playerNumber);
+          AiScore.setText("" + aiNumber);
 
-      if (playerNumber > aiNumber){
-          WinLose.setText(R.string.PlayerWins);
-          Compare.setText("<");
-          gameResult = 'W';
+          ((SnakeEyesApplication) getApplication())
+                  .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
       }
-      else if (aiNumber > playerNumber){
-          WinLose.setText(R.string.AiWins);
-          Compare.setText(">");
-          gameResult = 'L';
-      }
-      else {
-          WinLose.setText(R.string.tie);
-          Compare.setText("-");
-          gameResult = 'D';
-      }
-        SetImages(playerNumber, playerImage);
-        SetImages(aiNumber, aiImage);
-        PlayerScore.setText("" + playerNumber);
-        AiScore.setText("" + aiNumber);
 
-        ((SnakeEyesApplication) getApplication())
-                .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
     }
 
     private void SetImages(int number, ImageView image){
@@ -205,5 +194,29 @@ public class GameActivity extends AppCompatActivity {
         else {
             setTheme(R.style.AppTheme);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putInt("playerNumber",playerNumber);
+        ed.putInt("aiNumber",aiNumber);
+        ed.commit();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        saveState = sharedPreferences.getBoolean("saveGame",false);
+
+        if(saveState || !createActivity)
+        {
+            playerNumber = sharedPreferences.getInt("playerNumber", 0);
+            aiNumber = sharedPreferences.getInt("aiNumber", 0);
+        }
+        PlayGame();
+        createActivity =false;
+        SetBackgroundColor();
     }
 }

@@ -25,7 +25,7 @@
             <ImageView
                 android:id="@+id/imageViewAi"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 tools:srcCompat="@drawable/ic_dice_six_faces_one"
                 tools:visibility="invisible" />
@@ -33,7 +33,7 @@
             <ImageView
                 android:id="@+id/imageViewPlayer"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 tools:srcCompat="@drawable/ic_dice_six_faces_one"
                 tools:visibility="invisible" />
