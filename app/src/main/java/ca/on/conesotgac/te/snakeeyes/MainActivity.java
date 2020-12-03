@@ -3,6 +3,9 @@ package ca.on.conesotgac.te.snakeeyes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean darkThemeChecked;
     private boolean saveState;
     private boolean creatingActivity;
+    private boolean multipleGames = false;
 
     private String DesiredDiceSidesString;
     //On Create Function
@@ -50,8 +54,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Gets random number and changes picture to what it is
-              DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
-              Roll();
+                if (multipleGames == false){
+                    multipleGames = true;
+                    DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
+                    Roll();
+                }
             }
         });
     }
@@ -139,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Roll()
     {
+        DiceSide.setAlpha(0f);
         switch (DiceNumber)
         {
             case 1:
@@ -163,12 +171,18 @@ public class MainActivity extends AppCompatActivity {
                 DiceSide.setImageResource(R.drawable.ic_dice_target_light);
                 break;
         }
+        DiceSide.animate().alpha(1f).setDuration(1000).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                multipleGames = false;
+                super.onAnimationEnd(animation);
+            }
+        });
         if(DiceNumber>0)
         {
             DiceRolled.setText("" + DiceNumber);
             ((SnakeEyesApplication) getApplication())
                     .SEAddDiceResult(DesiredDiceSidesInt, DiceNumber);
         }
-
     }
 }
