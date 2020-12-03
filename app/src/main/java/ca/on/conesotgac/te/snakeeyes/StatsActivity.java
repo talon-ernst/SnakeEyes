@@ -28,11 +28,16 @@ public class StatsActivity extends AppCompatActivity {
     private TextView AvgMaxRoll;
     private TextView LastRoll;
 
+    private SharedPreferences sharedPreferences;
+
+    private boolean darkThemeChecked;
+
     private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SetBackgroundColor();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
         ActionBar actionBar = getSupportActionBar();
@@ -138,6 +143,16 @@ public class StatsActivity extends AppCompatActivity {
                 break;
         }
         return ret;
+    }
+
+    //Sets background color to light/dark based on players preference.
+    public void SetBackgroundColor() {
+        darkThemeChecked = sharedPreferences.getBoolean("themeChoice", false);
+        if (darkThemeChecked) {
+            setTheme(R.style.DarkTheme);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
     }
 
 }
