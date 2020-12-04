@@ -24,8 +24,7 @@ public class RollNotificationService extends Service {
         //Declare application for future use
         final SnakeEyesApplication application = ((SnakeEyesApplication) getApplication());
         //Get the last user roll
-        String lastRollText = " " + application.SEGetLastRoll("player_roll") +
-                " with a max roll of " + application.SEGetLastRoll("max_roll");
+        String lastRollText = " " + application.SEGetLastRoll("player_roll");
         //Constants for id and timer delay
         final int rollNotifId = 0;
         final int notificationDelay = 10000;
