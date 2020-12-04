@@ -26,4 +26,5 @@
             android:title="@string/PleaseSelect"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
+
 </PreferenceScreen>

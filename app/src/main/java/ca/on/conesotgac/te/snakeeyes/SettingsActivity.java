@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -12,11 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class SettingsActivity extends AppCompatActivity {
 
 
     private SharedPreferences sharedPreferences;
     private boolean darkThemeChecked;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,231 +6,246 @@
     android:layout_height="match_parent"
     tools:context=".StatsActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textViewGameStats"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/GameStats"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textViewGameStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/GameStats"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
-            <TableRow
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textViewAvgPlayerTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/AveragePlayerRoll"
-                    android:textSize="16sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textViewAvgPlayerRoll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textViewAvgPlayerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/AveragePlayerRoll"
+                        android:textSize="16sp" />
 
-            <TableRow
+                    <TextView
+                        android:id="@+id/textViewAvgPlayerRoll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewAvgComputerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/AverageComputerRoll"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewAvgComputerRoll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewAvgMaxGameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/AverageMaxRoll"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewAvgMaxGameRoll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewWinRateTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TotalRecord"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewWinRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewResetGameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/ResetGameStats"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/btnResetGameStats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Reset"
+                        android:textSize="16sp" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/textViewRollStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/RollStats"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textViewAvgComputerTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/AverageComputerRoll"
-                    android:textSize="16sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textViewAvgComputerRoll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textViewAvgRollTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/AveragePlayerRoll"
+                        android:textSize="16sp" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/textViewAvgRoll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/textViewAvgMaxGameTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/AverageMaxRoll"
-                    android:textSize="16sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textViewAvgMaxGameRoll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textViewAvgMaxRollTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/AverageMaxRoll"
+                        android:textSize="16sp" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/textViewAvgMaxRoll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/textViewWinRateTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/TotalRecord"
-                    android:textSize="16sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textViewWinRate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textViewLastRollTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/LastRoll"
+                        android:textSize="16sp" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/textViewLastRoll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/textViewResetGameTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ResetGameStats"
-                    android:textSize="16sp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/btnResetGameStats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Reset"
-                    android:textSize="16sp" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textViewResetRollTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/ResetDiceStats"
+                        android:textSize="16sp" />
 
-        </TableLayout>
+                    <Button
+                        android:id="@+id/btnResetRollStats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Reset"
+                        android:textSize="16sp" />
+                </TableRow>
+            </TableLayout>
 
-        <TextView
-            android:id="@+id/textViewRollStats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/RollStats"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/ftb"
+                android:src="@drawable/ic_cauliflower" />
+        </LinearLayout>
+    </ScrollView>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:id="@+id/textViewAvgRollTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/AveragePlayerRoll"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textViewAvgRoll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:id="@+id/textViewAvgMaxRollTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/AverageMaxRoll"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textViewAvgMaxRoll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:id="@+id/textViewLastRollTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/LastRoll"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textViewLastRoll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textAlignment="textEnd"
-                    android:textSize="16sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:id="@+id/textViewResetRollTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ResetDiceStats"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/btnResetRollStats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Reset"
-                    android:textSize="16sp" />
-            </TableRow>
-        </TableLayout>
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

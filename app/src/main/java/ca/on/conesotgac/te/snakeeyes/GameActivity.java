@@ -1,10 +1,8 @@
 package ca.on.conesotgac.te.snakeeyes;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
@@ -16,9 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameActivity extends AppCompatActivity {
-
 
     private int playerNumber;
     private int aiNumber;
@@ -38,23 +39,42 @@ public class GameActivity extends AppCompatActivity {
     TextView PlayerScore;
     TextView AiScore;
 
+    FloatingActionButton ftb;
+
     String DesiredDiceSidesString;
     Integer DesiredDiceSidesInt;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Sets prefs
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //Sets background
         SetBackgroundColor();
         createActivity = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        //Declare application for future use
+        final SnakeEyesApplication application = ((SnakeEyesApplication) getApplication());
+
+        //Get the last user roll
+        final String lastRollText = getString(R.string.roll_notif_body)  + " " +  application.SEGetLastRoll("player_roll");
+
+        //Constants for timer delay
+        final int timerDelay = 5000;
+        final int timerAfter = 30000;
+
+        //timer declaration
+        final Timer lastRollTimer = new Timer(true);
+
+        //Sets UI
         buttonRoll = findViewById(R.id.btnPlayGame);
         aiImage = findViewById(R.id.imageViewAi);
         playerImage = findViewById(R.id.imageViewPlayer);
@@ -62,10 +82,13 @@ public class GameActivity extends AppCompatActivity {
         Compare = findViewById(R.id.textViewCompare);
         PlayerScore = findViewById(R.id.textViewPlayerScore);
         AiScore = findViewById(R.id.textViewAiScore);
+        ftb = findViewById(R.id.floatingBtn);
 
+        //Gets the desired amount of dice sides
         DesiredDiceSidesString = sharedPreferences.getString("diceSides", "6");
         DesiredDiceSidesInt = Integer.parseInt(DesiredDiceSidesString);
 
+        //On click listener for button
         buttonRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,8 +98,31 @@ public class GameActivity extends AppCompatActivity {
                 ShowImages();
             }
         });
+
+        //On click listener for floating action button
+        ftb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+        //timer for snack bar showing up
+        lastRollTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Snackbar
+                        .make(findViewById(R.id.gameLayout), lastRollText, Snackbar.LENGTH_LONG)
+                        .setAction("Roll Again", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                        }).show();
+            }
+        }, timerDelay, timerAfter);
     }
 
+    //On restart function
     protected void onRestart() {
         super.onRestart();
         finish();
@@ -122,13 +168,10 @@ public class GameActivity extends AppCompatActivity {
         return ret;
     }
 
-
-
     public void ShowImages(){
         playerImage.setVisibility(View.VISIBLE);
         aiImage.setVisibility(View.VISIBLE);
     }
-
 
     private static int GetDiceNumber(int a, int b){
         return (b>=a
@@ -155,7 +198,6 @@ public class GameActivity extends AppCompatActivity {
               compareWinner = "-";
               gameResult = 'D';
           }
-
           if(BatteryStatus == true)
           {
               SetImagesWithoutAn(playerNumber, playerImage);
@@ -167,11 +209,9 @@ public class GameActivity extends AppCompatActivity {
               SetImagesWithAn(aiNumber, aiImage);
           }
 
-
           ((SnakeEyesApplication) getApplication())
                   .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
       }
-
     }
 
     private void SetImagesWithAn(int number, ImageView image){

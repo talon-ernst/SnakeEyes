@@ -27,7 +27,7 @@ public class RollNotificationService extends Service {
         String lastRollText = " " + application.SEGetLastRoll("player_roll");
         //Constants for id and timer delay
         final int rollNotifId = 0;
-        final int notificationDelay = 10000;
+        final int notificationDelay = 5000;
         //timer declaration
         final Timer notificationTimer = new Timer(true);
         //declaration of notification

@@ -10,11 +10,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class AboutActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private boolean darkThemeChecked;
+    FloatingActionButton ftb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,17 @@ public class AboutActivity extends AppCompatActivity {
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        ftb = findViewById(R.id.floatingBtn);
+
+
+        ftb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
+
     }
     @Override
     protected void onResume() {

@@ -78,7 +78,14 @@
                 android:textAlignment="center"
                 android:textSize="20sp" />
         </LinearLayout>
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/ftb"
+            android:src="@drawable/ic_cauliflower" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

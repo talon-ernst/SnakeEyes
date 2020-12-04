@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class StatsActivity extends AppCompatActivity {
 
     private Button btnResetGameStats;
@@ -33,6 +35,9 @@ public class StatsActivity extends AppCompatActivity {
     private boolean darkThemeChecked;
 
     private SharedPreferences sharedPref;
+    FloatingActionButton ftb;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,7 @@ public class StatsActivity extends AppCompatActivity {
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+        ftb = findViewById(R.id.floatingBtn);
         btnResetGameStats = findViewById(R.id.btnResetGameStats);
         btnResetRollStats = findViewById(R.id.btnResetRollStats);
 
@@ -53,6 +58,13 @@ public class StatsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ((SnakeEyesApplication) getApplication()).SEClearGameStats();
                 SERefreshGameStats();
+            }
+        });
+
+        ftb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
 

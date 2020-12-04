@@ -46,4 +46,7 @@
     <!-- Notification Strings -->
     <string name="roll_notif_title">Previous Roll</string>
     <string name="roll_notif_body">Your last dice roll was a</string>
+
+
+    <string name="ftb">Floating Button</string>
 </resources>
