@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
         creatingActivity = true;
         super.onCreate(savedInstanceState);
 
-        //start notification service
-        startService(new Intent(getApplicationContext(), RollNotificationService.class));
-
         //Sets UI
         buttonRoll = findViewById(R.id.btnRollDice);
         DiceSide = findViewById(R.id.imageViewDice);
@@ -61,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
                     multipleGames = true;
                     DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
                     Roll();
-                    //start notification service
-                    startService(new Intent(getApplicationContext(), RollNotificationService.class));
                 }
             }
         });
@@ -189,5 +184,12 @@ public class MainActivity extends AppCompatActivity {
             ((SnakeEyesApplication) getApplication())
                     .SEAddDiceResult(DesiredDiceSidesInt, DiceNumber);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        //start notification service
+        startService(new Intent(getApplicationContext(), RollNotificationService.class));
+        super.onStop();
     }
 }
