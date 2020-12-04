@@ -28,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
     private boolean createActivity;
     private String Winner;
     private String compareWinner;
+    public static boolean BatteryStatus = false;
 
     Button buttonRoll;
     ImageView aiImage;
@@ -154,8 +155,18 @@ public class GameActivity extends AppCompatActivity {
               compareWinner = "-";
               gameResult = 'D';
           }
-          SetImages(playerNumber, playerImage);
-          SetImages(aiNumber, aiImage);
+
+          if(BatteryStatus == true)
+          {
+              SetImagesWithoutAn(playerNumber, playerImage);
+              SetImagesWithoutAn(aiNumber, aiImage);
+          }
+          else
+          {
+              SetImagesWithAn(playerNumber, playerImage);
+              SetImagesWithAn(aiNumber, aiImage);
+          }
+
 
           ((SnakeEyesApplication) getApplication())
                   .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
@@ -163,7 +174,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void SetImages(int number, ImageView image){
+    private void SetImagesWithAn(int number, ImageView image){
 
         image.setAlpha(0f);
         switch (number){
@@ -232,5 +243,32 @@ public class GameActivity extends AppCompatActivity {
         PlayGame();
         createActivity =false;
         SetBackgroundColor();
+    }
+    private void SetImagesWithoutAn(int number, ImageView image){
+        switch (number){
+            case 1:
+                image.setImageResource(R.drawable.ic_dice_six_faces_one);
+                break;
+            case 2:
+                image.setImageResource(R.drawable.ic_dice_six_faces_two);
+                break;
+            case 3:
+                image.setImageResource(R.drawable.ic_dice_six_faces_three);
+                break;
+            case 4:
+                image.setImageResource(R.drawable.ic_dice_six_faces_four);
+                break;
+            case 5:
+                image.setImageResource(R.drawable.ic_dice_six_faces_five);
+                break;
+            case 6:
+                image.setImageResource(R.drawable.ic_dice_six_faces_six);
+                break;
+        }
+
+        PlayerScore.setText("" + playerNumber);
+        AiScore.setText("" + aiNumber);
+        WinLose.setText("" + Winner);
+        Compare.setText("" + compareWinner);
     }
 }

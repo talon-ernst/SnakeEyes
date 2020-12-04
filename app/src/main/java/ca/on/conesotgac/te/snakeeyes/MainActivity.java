@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean saveState;
     private boolean creatingActivity;
     private boolean multipleGames = false;
+    public static boolean batteryLow = false;
 
     private String DesiredDiceSidesString;
     //On Create Function
@@ -60,7 +62,15 @@ public class MainActivity extends AppCompatActivity {
                 if (multipleGames == false){
                     multipleGames = true;
                     DiceNumber = GetDiceNumber(1, DesiredDiceSidesInt);
-                    Roll();
+
+                    if(batteryLow == true)
+                    {
+                        Roll();
+                    }
+                   else
+                    {
+                        RollWithAn();
+                    }
                     //start notification service
                     startService(new Intent(getApplicationContext(), RollNotificationService.class));
                 }
@@ -125,8 +135,15 @@ public class MainActivity extends AppCompatActivity {
         {
             DiceNumber= sharedPreferences.getInt("DiceInt",0);
         }
+        if(batteryLow == false)
+        {
+            RollWithAn();
+        }
+        else
+        {
+            Roll();
+        }
 
-        Roll();
         SetBackgroundColor();
         creatingActivity = false;
     }
@@ -149,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void Roll()
+    public void RollWithAn()
     {
         DiceSide.setAlpha(0f);
         switch (DiceNumber)
@@ -190,4 +207,39 @@ public class MainActivity extends AppCompatActivity {
                     .SEAddDiceResult(DesiredDiceSidesInt, DiceNumber);
         }
     }
+
+    public void Roll()
+    {
+        switch (DiceNumber) {
+            case 1:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_one);
+                break;
+            case 2:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_two);
+                break;
+            case 3:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_three);
+                break;
+            case 4:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_four);
+                break;
+            case 5:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_five);
+                break;
+            case 6:
+                DiceSide.setImageResource(R.drawable.ic_dice_six_faces_six);
+                break;
+            default:
+                DiceSide.setImageResource(R.drawable.ic_dice_target_light);
+                break;
+        }
+            if(DiceNumber>0)
+            {
+                DiceRolled.setText("" + DiceNumber);
+                ((SnakeEyesApplication) getApplication())
+                        .SEAddDiceResult(DesiredDiceSidesInt, DiceNumber);
+            }
+            multipleGames = false;
+    }
+
 }
