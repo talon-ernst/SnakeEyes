@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
     private String Winner;
     private String compareWinner;
     public static boolean BatteryStatus = false;
+    private char gameResult;
 
     Button buttonRoll;
     ImageView aiImage;
@@ -95,6 +96,8 @@ public class GameActivity extends AppCompatActivity {
                 playerNumber = GetDiceNumber(1, DesiredDiceSidesInt);
                 aiNumber = GetDiceNumber(1, DesiredDiceSidesInt);
                 PlayGame();
+                ((SnakeEyesApplication) getApplication())
+                        .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
                 ShowImages();
             }
         });
@@ -180,7 +183,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void PlayGame(){
-      char gameResult;
+
       if(playerNumber>0)
       {
           if (playerNumber > aiNumber){
@@ -208,9 +211,6 @@ public class GameActivity extends AppCompatActivity {
               SetImagesWithAn(playerNumber, playerImage);
               SetImagesWithAn(aiNumber, aiImage);
           }
-
-          ((SnakeEyesApplication) getApplication())
-                  .SEAddGameResult(DesiredDiceSidesInt, playerNumber, aiNumber, gameResult);
       }
     }
 
@@ -279,8 +279,9 @@ public class GameActivity extends AppCompatActivity {
         {
             playerNumber = sharedPreferences.getInt("playerNumber", 0);
             aiNumber = sharedPreferences.getInt("aiNumber", 0);
+            PlayGame();
         }
-        PlayGame();
+
         createActivity =false;
         SetBackgroundColor();
     }
