@@ -6,8 +6,11 @@ import androidx.preference.PreferenceManager;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         SetBackgroundColor();
         setContentView(R.layout.activity_main);
         creatingActivity = true;
+        lowBattery(this);
         super.onCreate(savedInstanceState);
 
         //Sets UI
@@ -246,6 +250,29 @@ public class MainActivity extends AppCompatActivity {
         //start notification service
         startService(new Intent(getApplicationContext(), RollNotificationService.class));
         super.onStop();
+    }
+
+    public void lowBattery(Context context)
+    {
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = context.registerReceiver(null, ifilter);
+
+
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+        float batteryPct = level * 100 / (float)scale;
+
+        if(batteryPct <= 15)
+        {
+            batteryLow = true;
+            GameActivity.BatteryStatus = true;
+        }
+        else
+        {
+            batteryLow = false;
+            GameActivity.BatteryStatus = false;
+        }
     }
 
 }

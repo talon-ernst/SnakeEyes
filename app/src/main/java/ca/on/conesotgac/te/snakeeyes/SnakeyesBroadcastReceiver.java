@@ -36,4 +36,4 @@ public class SnakeyesBroadcastReceiver extends BroadcastReceiver {
     }
 
 }
-    //Intent intent = getApplicationContext().registerReceiver(SnakeyesBroadcastReceiver(),new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
